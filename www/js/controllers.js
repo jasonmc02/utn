@@ -57,12 +57,18 @@ angular.module('starter.controllers', [])
     alert("logout");
   };
 })
-.controller('UsersCtrl', function ($scope, $http) {
+.controller('UsersCtrl', function ($scope, $http, $ionicLoading) {
+  $ionicLoading.show({
+    noBackdrop: true,
+  });
   $http
   .get('http://utn.herokuapp.com/api/users')
   .then(function (response) {
     $scope.users = response.data;
-  }, function (error) { });
+    $ionicLoading.hide();
+  }, function (error) {
+    $ionicLoading.hide();
+  });
 })
 .controller('UserCtrl', function ($scope, $stateParams) {
     // $scope.responses = [
