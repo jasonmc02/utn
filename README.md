@@ -4,31 +4,30 @@
 
 1. clone repo
 ```
-<b>git clone ...</b>
+git clone git@github.com:jasonmc02/utn.git
 ```
 
 2. cd into it
 ```
-<b>cd utn</b>
+cd utn
 ```
 
 3. install dependencies
 ```
-<b>npm install && bower install</b>
+npm install && bower install
 ```
 
-4. add a platform (android, ios, or both)
+4. add a platform. for android you probably need extra steps, like setup jre, gennymotion, android adv, etc...
 ```
-<b>ionic platform add ios</b>
-<b>ionic platform add android</b>
-```
-
-5. build
-```
-<b>ionic build ios</b>
+ionic platform add ios
 ```
 
-6. emulate
+5. build for your platform
 ```
-<b>ionic emulate ios</b>
+ionic build ios
+```
+
+6. emulate for your platform
+```
+ionic emulate ios
 ```
