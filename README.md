@@ -7,27 +7,27 @@
 git clone git@github.com:jasonmc02/utn.git
 ```
 
-2. cd into it
+1. cd into it
 ```
 cd utn
 ```
 
-3. install dependencies
+1. install dependencies
 ```
 npm install && bower install
 ```
 
-4. add a platform. for android you probably need extra steps, like setup jre, gennymotion, android adv, etc...
+1. add a platform. for android you probably need extra steps, like setup jre, gennymotion, android adv, etc...
 ```
 ionic platform add ios
 ```
 
-5. build for your platform
+1. build for your platform
 ```
 ionic build ios
 ```
 
-6. emulate for your platform
+1. emulate for your platform
 ```
 ionic emulate ios
 ```
