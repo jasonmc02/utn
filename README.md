@@ -31,3 +31,12 @@ ionic build ios
 ```
 ionic emulate ios
 ```
+
+***
+
+you can also run on the browser with, but some features may not work
+```
+ionic serve
+```
+
+
