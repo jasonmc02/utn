@@ -3,9 +3,6 @@
 #### how to setup
 
 1. clone repo
-```
-git clone git@github.com:jasonmc02/utn.git
-```
 2. cd into it
 ```
 cd utn
