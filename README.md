@@ -21,17 +21,23 @@ npm install && bower install
 ```
 ionic platform add ios
 ```
+5) add plugins
 
-5) build for your platform
+```
+cordova plugin add cordova-plugin-camera
+cordova plugin add cordova-plugin-console
+cordova plugin add cordova-plugin-device
+```
+
+6) build for your platform
 ```
 ionic build ios
 ```
 
-6) emulate for your platform
+7) emulate for your platform
 ```
 ionic emulate ios
 ```
-
 
 ***
 
