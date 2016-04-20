@@ -1,5 +1,5 @@
+var Users = [];
 angular.module('starter.controllers', [])
-
 .controller('LoginCtrl', function ($state, $scope, $stateParams) {
   $scope.loginData = {};
   $scope.doLogin = function () {
@@ -11,49 +11,13 @@ angular.module('starter.controllers', [])
       $state.go('app.users');
     }
   };
+  $scope.doFacebookLogin = function ($event) {
+    $event.stopPropagation();
+    $event.preventDefault();
+  };
 })
 .controller('MenuCtrl', function ($scope, $ionicModal, $timeout) {
-
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  // Form data for the login modal
-  // $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  // $ionicModal.fromTemplateUrl('templates/login.html', {
-  //   scope: $scope
-  // }).then(function(modal) {
-  //   $scope.modal = modal;
-  // });
-
-  // Triggered in the login modal to close it
-  // $scope.closeLogin = function() {
-  //   $scope.modal.hide();
-  // };
-
-  // Open the login modal
-  // $scope.login = function() {
-  //   $scope.modal.show();
-  // };
-
-  // Perform the login action when the user submits the login form
-  // $scope.doLogin = function() {
-  //   console.log('Doing login', $scope.loginData);
-
-  //   // Simulate a login delay. Remove this and replace with your login
-  //   // code if using a login system
-  //   $timeout(function() {
-  //     $scope.closeLogin();
-  //   }, 1000);
-  // };
-
   $scope.logout = function () {
-    // $scope.modal.show();
     alert("logout");
   };
 })
@@ -64,20 +28,41 @@ angular.module('starter.controllers', [])
   $http
   .get('http://utn.herokuapp.com/api/users')
   .then(function (response) {
-    $scope.users = response.data;
+    Users = response.data;
+    $scope.users = Users;
     $ionicLoading.hide();
   }, function (error) {
     $ionicLoading.hide();
   });
 })
-.controller('UserCtrl', function ($scope, $stateParams) {
-    // $scope.responses = [
-    //   { title: 'api response 1', id: 1 },
-    //   { title: 'api response 2', id: 2 },
-    //   { title: 'api response 3', id: 3 },
-    //   { title: 'api response 4', id: 4 },
-    //   { title: 'api response 5', id: 5 },
-    //   { title: 'api response 6', id: 6 }
-    // ];
+.controller('UserCtrl', function ($scope, $stateParams, $cordovaGeolocation) {
+  var userDetailled,
+      userLocation,
+      mapOptions,
+      marker,
+      userMap;
+
+  Users.map(function(user) {
+    if (user._id == $stateParams.id) {
+      userDetailled = user;
+    }
+  });
+  myLatlng = new google.maps.LatLng(-34.397, 150.644),
+  mapOptions = { 
+    center: myLatlng,
+    zoom: 8,
+    timeout: 10000,
+    enableHighAccuracy: true,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  },
+  marker = new google.maps.Marker({
+    position: myLatlng,
+    title: userDetailled.name
+  });
+  userMap = new google.maps.Map(document.getElementById('map-container'), mapOptions);
+
+  marker.setMap(userMap);
+  $scope.user = userDetailled;
+  $scope.map = userMap;
 });
 
