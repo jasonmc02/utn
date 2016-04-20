@@ -22,16 +22,22 @@ npm install && bower install
 ionic platform add ios
 ```
 
-5) build for your platform
+5) add plugins
+```
+cordova plugin add cordova-plugin-camera
+cordova plugin add cordova-plugin-console
+cordova plugin add cordova-plugin-device
+```
+
+6) build for your platform
 ```
 ionic build ios
 ```
 
-6) emulate for your platform
+7) emulate for your platform
 ```
 ionic emulate ios
 ```
-
 
 ***
 
@@ -40,5 +46,3 @@ you can also run on the browser with this command, but some features may not wor
 ```
 ionic serve
 ```
-
-

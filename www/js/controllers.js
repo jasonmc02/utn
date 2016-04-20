@@ -1,6 +1,7 @@
 var Users = [];
-angular.module('starter.controllers', [])
-.controller('LoginCtrl', function ($state, $scope, $stateParams) {
+angular.module('starter.controllers', ['ionic', 'starter.services'])
+.controller('LoginCtrl', function ($state, $scope, $stateParams, $ionicHistory) {
+  $ionicHistory.clearHistory();
   $scope.loginData = {};
   $scope.doLogin = function () {
     var data = $scope.loginData,
@@ -16,9 +17,22 @@ angular.module('starter.controllers', [])
     $event.preventDefault();
   };
 })
-.controller('MenuCtrl', function ($scope, $ionicModal, $timeout) {
+.controller('MenuCtrl', function ($state, $scope, Camera) {
+  $scope.photo = function () {
+    var options = {
+      allowEdit: false,
+      quality: 100,
+      cameraDirection: 1,
+      saveToPhotoAlbum: true
+    };
+    Camera
+    .getPicture(options)
+    .then(function (imageData) {
+    }, function (error) {
+    });
+  };
   $scope.logout = function () {
-    alert("logout");
+    $state.go('login');
   };
 })
 .controller('UsersCtrl', function ($scope, $http, $ionicLoading) {
