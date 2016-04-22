@@ -1,5 +1,5 @@
 var Users = [];
-var api = 'http://192.168.1.2:5000/';
+var api = 'http://crscript.com/';
 angular.module('starter.controllers', ['ionic', 'starter.services'])
     .controller('LoginCtrl', function($state, $scope, $stateParams, $ionicHistory, $http, $ionicLoading) {
         $ionicHistory.clearHistory();
@@ -132,7 +132,6 @@ angular.module('starter.controllers', ['ionic', 'starter.services'])
                 userDetailled = user;
             }
         });
-
         $scope.user = userDetailled;
         $scope.map = userMap;
     });

@@ -33,7 +33,7 @@ factory('httpRequestInterceptor', ['$q', '$rootScope',
             },
             responseError: function(response) {
                 if (response.status === 401) {
-                    localStorage.setItem("token", "");
+                    localStorage.setItem("tk", "");
                     window.location = '/';
                 }
                 return $q.reject(response);
