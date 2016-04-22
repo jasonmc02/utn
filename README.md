@@ -27,6 +27,8 @@ ionic platform add ios
 cordova plugin add cordova-plugin-camera
 cordova plugin add cordova-plugin-console
 cordova plugin add cordova-plugin-device
+cordova plugin add cordova-plugin-whitelist  # TODO change config.xml <allow-navigation href="http://*/*" />
+cordova plugin add cordova-plugin-geolocation
 ```
 
 6) build for your platform

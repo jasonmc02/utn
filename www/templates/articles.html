@@ -1,0 +1,9 @@
+<ion-view view-title="Artículos">
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="article in vm.articles" href="#/app/article/{{article._id}}">
+                {{article.name}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

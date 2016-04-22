@@ -4,16 +4,16 @@
       <form ng-submit="doLogin()">
         <div class="list">
           <label class="item item-input">
-            <input type="email" placeholder="Email" ng-model="loginData.email">
+            <input type="text" placeholder="Correo o Nombre de Usuario" ng-model="loginData.email">
           </label>
           <label class="item item-input">
-            <input type="password" placeholder="Password" ng-model="loginData.password">
+            <input type="password" placeholder="Contraseña" ng-model="loginData.password">
           </label>
           <label class="item">
-            <button class="button button-block button-positive" type="submit">Log in</button>
+            <button class="button button-block button-positive" type="submit">Iniciar</button>
           </label>
           <label class="item">
-            <button class="facebook-sign-in button button-block" ng-click="doFacebookLogin($event)">Login with Facebook</button>
+            <button class="facebook-sign-in button button-block" ng-click="doFacebookLogin($event)">Iniciar con Facebook</button>
           </label>
         </div>
       </form>

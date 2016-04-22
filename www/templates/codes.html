@@ -1,0 +1,9 @@
+<ion-view view-title="Códigos">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="code in codes" href="#/app/code/{{code._id}}/articles">
+        {{code.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

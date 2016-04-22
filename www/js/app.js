@@ -1,58 +1,51 @@
-// Ionic Starter App
+'use strict';
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
+
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
-.run(function ($ionicPlatform) {
-  $ionicPlatform.ready(function () {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+    .run(function($ionicPlatform) {
+        $ionicPlatform.ready(function() {
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            // for form inputs)
+            if (window.cordova && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                cordova.plugins.Keyboard.disableScroll(true);
 
+            }
+            if (window.StatusBar) {
+                // org.apache.cordova.statusbar required
+                StatusBar.styleDefault();
+            }
+        });
+    });
+
+
+/**
+ * Token Interceptor, Adding on header for future requests
+ */
+angular.module('starter').
+factory('httpRequestInterceptor', ['$q', '$rootScope',
+    function($q, $rootScope) {
+        return {
+            request: function(config) {
+                var token = localStorage.getItem("tk");
+                config.headers.Authorization = 'Bearer ' + token;
+                return config;
+            },
+            responseError: function(response) {
+                if (response.status === 401) {
+                    localStorage.setItem("token", "");
+                    window.location = '/';
+                }
+                return $q.reject(response);
+            }
+        };
     }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
-.config(function ($stateProvider, $urlRouterProvider) {
-  $stateProvider
-  .state('login', {
-    url: '/login',
-    abstract: false,
-    templateUrl: 'templates/login.html',
-    controller: 'LoginCtrl'
-  })
-  .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'MenuCtrl'
-  })
-  .state('app.users', {
-    url: '/users',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/users.html',
-        controller: 'UsersCtrl'
-      }
-    }
-  })
-  .state('app.user', {
-    url: '/user/:id',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/user.html',
-        controller: 'UserCtrl'
-      }
-    }
-  });
-  // if none of the above states are matched, use this as the fallback
-  // $urlRouterProvider.otherwise('/login');
-  $urlRouterProvider.otherwise('/app/users');
-});
+]);
+
+angular.module('starter')
+    .config(['$httpProvider',
+        function($httpProvider) {
+            $httpProvider.interceptors.push('httpRequestInterceptor');
+            $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+        }
+    ]);
